@@ -9,11 +9,11 @@ from sklearn.model_selection import train_test_split
 NGROK_AUTH_TOKEN = '3JaaoLCSxHpuLoz0LTvkUetOyfX_2jMkMZCB4kKCAnzgauBaz'
 ngrok.set_auth_token(NGROK_AUTH_TOKEN)
 
-# Start MLflow UI on port 5000
-process = subprocess.Popen(["mlflow", "ui", "--port", "5000"])
+# Start MLflow UI on port 1558
+process = subprocess.Popen(["mlflow", "ui", "--port", "1558"])
 
 # Create public tunnel
-public_url = ngrok.connect(5000).public_url
+public_url = ngrok.connect(1558).public_url
 print("MLflow UI is available at:", public_url)
 
 # Set the tracking URL for MLflow
