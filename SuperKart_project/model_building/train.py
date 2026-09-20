@@ -5,7 +5,7 @@ import mlflow
 import pandas as pd
 
 # Set your auth token here (replace with your actual token from the ngrok dashboard)
-NGROK_AUTH_TOKEN = os.environ['NGROK_AUTH_TOKEN']
+NGROK_AUTH_TOKEN = '3JaaoLCSxHpuLoz0LTvkUetOyfX_2jMkMZCB4kKCAnzgauBaz'
 ngrok.set_auth_token(NGROK_AUTH_TOKEN)
 
 # Start MLflow UI on port 5000
