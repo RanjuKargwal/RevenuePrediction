@@ -4,6 +4,8 @@ import subprocess
 import mlflow
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.compose import make_column_transformer
+
 
 # Set your auth token here (replace with your actual token from the ngrok dashboard)
 NGROK_AUTH_TOKEN = '3JaaoLCSxHpuLoz0LTvkUetOyfX_2jMkMZCB4kKCAnzgauBaz'
