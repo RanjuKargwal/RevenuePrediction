@@ -10,7 +10,7 @@ expected_columns = [
     "Product_MRP", "Store_Id", "Store_Establishment_Year", "Store_Size",
      "Store_Location_City_Type", "Store_Type", "Product_Store_Sales_Total",
 ]
-missing = [c for c in expected_columns if c not in df.columns]
+missing = [c for c in expected_columns if c not in data.columns]
 if missing:
     raise ValueError(f"Dataset is missing expected columns: {missing}")
 
