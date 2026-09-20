@@ -4,7 +4,7 @@ import mlflow
 import pandas as pd
 import xgboost as xgb
 import joblib
-
+import time
 from pyngrok import ngrok
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.compose import make_column_transformer
@@ -12,14 +12,23 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.metrics import mean_absolute_error, r2_score, root_mean_squared_error
 
-# Set your auth token here (replace with your actual token from the ngrok dashboard)
-NGROK_AUTH_TOKEN = '3JaaoLCSxHpuLoz0LTvkUetOyfX_2jMkMZCB4kKCAnzgauBaz'
+# 1. Kill any process already using port 1558
+subprocess.run(["fuser", "-k", "1558/tcp"], stderr=subprocess.DEVNULL)
+subprocess.run(["pkill", "-f", "mlflow"], stderr=subprocess.DEVNULL)
+time.sleep(1)  # Brief delay to allow port release
+
+# 2. Kill existing ngrok tunnels to avoid duplicate tunnel errors
+ngrok.kill()
+
+# 3. Set Ngrok Auth Token
+NGROK_AUTH_TOKEN = "3JaaoLCSxHpuLoz0LTvkUetOyfX_2jMkMZCB4kKCAnzgauBaz"
 ngrok.set_auth_token(NGROK_AUTH_TOKEN)
 
-# Start MLflow UI on port 1558
+# 4. Start MLflow UI on port 1558
 process = subprocess.Popen(["mlflow", "ui", "--port", "1558"])
+time.sleep(3)  # Wait for MLflow to finish binding to the port
 
-# Create public tunnel
+# 5. Connect ngrok tunnel
 public_url = ngrok.connect(1558).public_url
 print("MLflow UI is available at:", public_url)
 
