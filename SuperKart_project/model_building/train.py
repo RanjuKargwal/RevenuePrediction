@@ -2,6 +2,8 @@
 from pyngrok import ngrok
 import subprocess
 import mlflow
+from google.colab import userdata
+import pandas as pd
 
 # Set your auth token here (replace with your actual token from the ngrok dashboard)
 NGROK_AUTH_TOKEN = userdata.get('NGROK_AUTH_TOKEN')
@@ -23,6 +25,10 @@ mlflow.set_experiment("SuperKart-Prediction-Experiment")
 
 # NOTE: categorical columns are left as raw strings; they are one-hot-encoded
 # inside the pipeline below, so training and serving stay consistent.
+df = pd.read_csv("SuperKart_project/data/SuperKart.csv")
+df.drop(columns=["Product_Id"], inplace=True)
+df.drop(columns=["Store_Id"], inplace=True)
+
 
 target_col = "Product_Store_Sales_Total"
 X = df.drop(columns=[target_col])
@@ -36,7 +42,7 @@ numeric_features = [
     'Product_Weight', 'Product_Allocated_Area', 'Product_MRP'
 ]
 categorical_features = [
-    'Product_Sugar_Content', 'Product_Type', 'Store_Id', 'Store_Establishment_Year',
+    'Product_Sugar_Content', 'Product_Type', 'Store_Establishment_Year',
     'Store_Size', 'Store_Location_City_Type', 'Store_Type'
 ]
 
