@@ -2,7 +2,6 @@
 from pyngrok import ngrok
 import subprocess
 import mlflow
-from google.colab import userdata
 import pandas as pd
 
 # Set your auth token here (replace with your actual token from the ngrok dashboard)
